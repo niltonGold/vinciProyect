@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react';
-import useAPI from '../hooks/useAPI';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const Login: FC = () => {
-  const { getUser } = useAPI();
+const SignUp: FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checkbox, setCheckbox] = useState('');
 
   useEffect(() => {
     const userLoad = localStorage.getItem('user');
@@ -20,7 +20,7 @@ const Login: FC = () => {
   return (
     <>
       <div className="flex flex-col m-10 mt-20">
-        <div className="text-white">log in</div>
+        <div className="text-white">Sign Up</div>
 
         <div className="flex flex-raw">
           <div className="px-20 py-10 text-base bg-slate-100 w-1/2 h-screen flex justify-center flex-col items-center">
@@ -35,10 +35,8 @@ const Login: FC = () => {
                   e.preventDefault();
                   const emailValue = e.target[0].defaultValue;
                   const passwordValue = e.target[1].defaultValue;
-                  const rememberValue = e.target[2].checked;
-                  const response = await getUser(emailValue, passwordValue, rememberValue);
-                  localStorage.setItem('id', response.id);
-                  localStorage.setItem('email', response.email);
+                  toast('Inserted User', { type: 'success', position: 'top-center' });
+                  navigate('/');
                 }}
               >
                 <div className="mb-2">
@@ -50,6 +48,7 @@ const Login: FC = () => {
                     }}
                     value={email}
                     placeholder="Enter your email"
+                    required
                   />
                 </div>
 
@@ -62,42 +61,21 @@ const Login: FC = () => {
                     }}
                     value={password}
                     placeholder="Enter your password"
+                    required
                   />
-                </div>
-
-                <div className="flex justify-between mb-2">
-                  <div>
-                    <input
-                      className="mr-2"
-                      type="checkbox"
-                      id="remenber"
-                      name="remember"
-                      value={checkbox}
-                    />
-                    <label className="text-sm" htmlFor="remember">
-                      Remember me
-                    </label>
-                  </div>
-
-                  <div>
-                    <a className="text-sm" href="/ForgotPassword">
-                      Forgot password
-                    </a>
-                  </div>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <input
                     className="bg-[#6D3AF9] hover:bg-blue-700 text-white font-bold py-2 w-full rounded-lg focus:outline-none focus:shadow-outline"
                     type="submit"
-                    value="Continue"
+                    value="Sign Up"
                   />
                 </div>
 
                 <div className="border-t-4 py-3 mt-4 text-center text-[#9A9696]">
-                  Don’t have an account?{' '}
-                  <a className="underline text-[#0000FF]" href="/SignUp">
-                    Sign up
+                  <a className="underline text-[#0000FF]" href="/">
+                    Cancel
                   </a>
                 </div>
               </form>
@@ -111,4 +89,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;
