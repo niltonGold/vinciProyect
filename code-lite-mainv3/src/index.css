@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Oakes Grotesk', sans-serif;
+  src: url('../static/Oakes Grotesk Bold Italic.ttf') format('ttf');
+}
+
+@layer base {
+  body {
+    @apply bg-gray-800;
+  }
+}
+
+
+body {
+  font-family: Oakes Grotesk, sans-serif ;
+  
+}
